@@ -1,4 +1,4 @@
-# !/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 import numpy as np
@@ -16,13 +16,15 @@ NUM_GRID_LENGTH = 28
 可调参数
 """
 # 训练集数目，为40时使用左上角40 * 40个样本作为训练样本
-train_set_size = 60
+train_set_size = 70
 # 测试集数目，为10时使用左上角10 * 10个样本作为测试样本
 test_set_size = 20
+# 神经网络层级
+NN_LAYER = [NUM_GRID_LENGTH * NUM_GRID_LENGTH, 400, 150, 10]
 # Learning rate (alpha)
-param_learning_rate = 0.08
+param_learning_rate = 0.11
 # Epochs
-param_epochs = 200000
+param_epochs = 100000
 
 """
 全局变量
@@ -158,7 +160,7 @@ def init_easy():
 
 def nn_train():
     global nn
-    nn = NeuralNetwork([NUM_GRID_LENGTH * NUM_GRID_LENGTH, 60, 30, 10], activation='sigmoid')
+    nn = NeuralNetwork(NN_LAYER, activation='sigmoid')
     train_X = []
     train_y = []
     for num in range(10):
@@ -249,9 +251,9 @@ def test():
 
 
 if __name__ == '__main__':
-    # init()
+    init()
     init_easy()
     nn_train()
-    # test_init()
+    test_init()
     test_init_easy()
     test()
